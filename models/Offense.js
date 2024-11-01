@@ -27,7 +27,7 @@ const offenseSchema = new mongoose.Schema({
     },
     paidStatus: {
         type: String,
-        default: 'unpaid',
+        default: 'Unpaid',
     },
 }, { timestamps: true });
 

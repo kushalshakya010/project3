@@ -1,35 +1,23 @@
 const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema({
-    licenseNumber: {
+    offenseId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Offense',
+        required: true,
+    },
+    paymentIntentId: {
         type: String,
         required: true,
     },
-    offenseDetails: {
-        type: String,
-        required: true,
-    },
-    fine: {
+    amount: {
         type: Number,
         required: true,
     },
-    location: {
+    status: {
         type: String,
-        required: true,
+        default: 'Pending',
     },
-    contactNumber: {
-        type: String,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-    },
-    paidStatus: {
-        type: String,
-        enum: ['unpaid', 'paid'],
-        default: 'unpaid',
-    },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Payment', paymentSchema);

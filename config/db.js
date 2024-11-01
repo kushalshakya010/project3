@@ -1,9 +1,14 @@
-// config/db.js
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config(); // Load environment variables from .env
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://kushalshakya010:padma123@trafficoffencemanagemen.wyrbo.mongodb.net/?retryWrites=true&w=majority&appName=TrafficOffenceManagement');
+        await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
         console.log('MongoDB connected');
     } catch (error) {
         console.error('MongoDB connection failed:', error);
