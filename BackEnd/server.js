@@ -13,6 +13,7 @@ app.use(express.json()); // For parsing JSON requests
 mongoose.connect(process.env.MONGODB_URI, { useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
+    
 
 // Payment routes
 app.use('/api/payments', paymentRoutes);

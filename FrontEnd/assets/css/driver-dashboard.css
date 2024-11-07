@@ -1,0 +1,120 @@
+/* driver-dashboard.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.driver-dashboard-container {
+    max-width: 1200px;  /* Set container width to 1200px */
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    padding: 10px;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 28px;
+    color:  white;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}
+
+header nav ul li a:hover {
+    /* text-decoration: underline; */
+    background-color: white;
+    border-radius: 5px;
+    color: #4CAF50;
+    padding: 2px;
+}
+
+#offense-list h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    /* color: #555; */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+td button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+button:hover{
+    background-color: #2e6b31;
+
+}
+
+td button[disabled] {
+    background-color: #ccc;
+    /* cursor: not-allowed; */
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination .page-btn {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.pagination .page-btn.active {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.pagination .page-btn:hover {
+    background-color: #2e6b31;
+}

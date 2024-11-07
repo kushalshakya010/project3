@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Traffic Offense Management System</title>
+    <link rel="stylesheet" href="/FrontEnd/assets/css/styles.css">
+    <link rel="stylesheet" href="/FrontEnd/assets/css/login.css">
+</head>
+<body>
+    <div>
+        <header class="header">
+            <!-- <h1>TOMS</h1> -->
+            <nav class="navbar">
+              <a href="index.html">Home</a>
+            </nav>
+        </header> 
+        
+    </div>
+    <div class="login-container">
+        <h2>Login to the <br> Traffic Offense Management System</h2>
+        <form id="login-form">
+            <label for="role">Select Role:</label>
+            <select id="role" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="police">Police</option>
+                <option value="driver">Driver</option>
+            </select>
+
+            <label for="license">License Number:</label>
+            <input type="text" id="license" name="license" placeholder="Enter your license number" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p>You will need either your Police's License or Driver's License to Login</p>
+    </div>
+
+    <script src="/FrontEnd/assets/js/main.js"></script>
+    <script src="/FrontEnd/js/auth.js"></script>
+</body>
+</html>

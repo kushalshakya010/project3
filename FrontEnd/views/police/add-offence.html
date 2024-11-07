@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Offense - Traffic Offense Management</title>
+    <link rel="stylesheet" href="/FrontEnd/assets/css/styles.css">
+    <link rel="stylesheet" href="/FrontEnd/assets/css/add-offense.css">
+</head>
+<body>
+    <div class="add-offense-container">
+        <header>
+            <h1>Add a New Offense</h1>
+            <nav>
+                <ul>
+                    <li><a href="./dashboard.html">Back to Dashboard</a></li>
+                    <li><a href="./logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <form id="add-offense-form">
+            <div class="form-group">
+                <label for="license-number">License Number</label>
+                <input type="number" id="license-number" name="license-number" required>
+            </div>
+            <div class="form-group">
+                <label for="offense-details">Offense Description</label>
+                <textarea id="offense-details" name="offense-details" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fine">Fine Amount</label>
+                <input type="number" id="fine" name="fine" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Offense Location</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="contact-number">Contact Number</label>
+                <input type="text" id="contact-number" name="contact-number" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Driver's Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit">Add Offense</button>
+        </form>
+    </div>
+
+    <script src="/FrontEnd/assets/js/main.js"></script>
+    <script src="/FrontEnd/js/api.js"></script>
+</body>
+</html>

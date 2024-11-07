@@ -1,0 +1,45 @@
+/* Styling for the Driver payment page */
+.payment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.payment-container h2 {
+    color: #333;
+}
+
+.payment-container .offense-list {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.payment-container .offense-list th, .payment-container .offense-list td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.payment-container .offense-list th {
+    background-color: #f2f2f2;
+}
+
+.payment-container .offense-list tr:hover {
+    background-color: #f1f1f1;
+}
+
+.payment-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.payment-button:hover {
+    background-color: #e53935;
+}

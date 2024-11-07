@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Dashboard - Traffic Offense Management</title>
+    <link rel="stylesheet" href="/FrontEnd/assets/css/police-dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Police Dashboard</h1>
+            <nav>
+                <ul>
+                    <li><a href="/FrontEnd/views/police/add-offence.html">Add Offense</a></li>
+                    <li><a href="/FrontEnd/views/police/prediction.html">Prediction Page</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Pending Offenses Section -->
+        <section class="offense-list">
+            <h2>Pending Offenses</h2>
+            <table id="pending-offenses">
+                <thead>
+                    <tr>
+                        <th>License Number</th>
+                        <th>Offense</th>
+                        <th>Location</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Pending offenses will be dynamically loaded here -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Offense History Section -->
+        <section class="offense-history">
+            <h2>Offense History</h2>
+            <table id="offense-history">
+                <thead>
+                    <tr>
+                        <th>License Number</th>
+                        <th>Offense</th>
+                        <th>Location</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Paid Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Paid offenses will be dynamically loaded here -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- Edit Offense Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Edit Offense</h3>
+            <form id="editForm">
+                <label for="licenseNumber">License Number:</label>
+                <input type="text" id="licenseNumber" readonly>
+
+                <label for="offense">Offense:</label>
+                <input type="text" id="offense">
+
+                <label for="location">Location:</label>
+                <input type="text" id="location">
+
+                <label for="amount">Amount:</label>
+                <input type="text" id="amount">
+
+                <label for="date">Date:</label>
+                <input type="date" id="date">
+
+                <button type="button" onclick="saveEdit()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/FrontEnd/js/policeDashboard.js"></script>
+</body>
+</html>
