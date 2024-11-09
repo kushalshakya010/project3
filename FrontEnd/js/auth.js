@@ -1,40 +1,99 @@
-document.getElementById('login-form').addEventListener('submit', function(event) {
+document
+  .getElementById("login-form")
+  ?.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const role = document.getElementById('role').value;
-    const licenseNumber = document.getElementById('license').value;
+    const licenseNumber = document.getElementById("license").value;
+    const password = document.getElementById("password").value;
 
-    if (!role || !licenseNumber) {
-        alert('Please fill out all fields');
-        return;
+    if (!licenseNumber || !password) {
+      alert("Please fill out all fields");
+      return;
     }
 
+    // http://localhost:3000/api/payments
     // Send the data to backend API
-    fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            role: role,
-            licenseNumber: licenseNumber
-        }),
+    fetch("http://localhost:3000/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        licenseNumber: licenseNumber,
+        password: password,
+      }),
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Redirect to the appropriate dashboard
-            if (role === 'police') {
-                window.location.href = '/police/dashboard.html'; // Redirect to Police dashboard
-            } else {
-                window.location.href = '/drivers/dashboard.html'; // Redirect to Driver dashboard
-            }
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.user.role === "police") {
+          // Redirect to the appropriate dashboard
+
+          window.location.href = "../views/police/dashboard.html";
         } else {
-            alert(data.message || 'Login failed');
+          window.location.href = "../views/driver/dashboard.html";
         }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred during login");
+      });
+  });
+
+//-----------------------------------register--------------------------------------
+document
+  .getElementById("register-form")
+  ?.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const role = document.getElementById("role").value;
+    const licenseNumber = document.getElementById("license").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const contactNumber = document.getElementById("contactNumber").value;
+    const password = document.getElementById("password").value;
+    console.log(role, licenseNumber, name, email, contactNumber, password);
+
+    if (
+      !role ||
+      !licenseNumber ||
+      !password ||
+      !name ||
+      !email ||
+      !contactNumber
+    ) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    // http://localhost:3000/api/payments
+    // Send the data to backend API
+    fetch("http://localhost:3000/api/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        role: role,
+        licenseNumber: licenseNumber,
+        name: name,
+        email: email,
+        contactNumber: contactNumber,
+        password: password,
+      }),
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred during login');
-    });
-});
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          // Redirect to the appropriate dashboard
+          window.location.replace("../views/login.html");
+        } else {
+          alert(data.message || "Login failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred during login");
+      });
+  });

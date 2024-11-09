@@ -21,6 +21,10 @@ const paymentSchema = new mongoose.Schema({
         enum: ['Pending', 'Paid', 'Failed'], // Limit status to defined values
         default: 'Pending',
     },
+    location: {
+        type: String,
+        required : true,
+    }
 }, { timestamps: true });
 
 // Optional: Indexing for better performance

@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['licenseHolder', 'police'],  // Two possible roles
+        enum: ['driver', 'police'],  // Two possible roles
         required: true,
     },
     password: {
