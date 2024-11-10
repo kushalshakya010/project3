@@ -26,6 +26,12 @@ document
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+        localStorage.clear();
+        localStorage.setItem("user", JSON.stringify(data.user));
         if (data.user.role === "police") {
           // Redirect to the appropriate dashboard
 
@@ -84,12 +90,14 @@ document
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        if (data) {
+        console.log({ data: data });
+        if (!data.error) {
+          alert(data.message);
           // Redirect to the appropriate dashboard
-          window.location.replace("../views/login.html");
+          // window.location.replace("../views/login.html");
+          window.location.href = "../views/login.html";
         } else {
-          alert(data.message || "Login failed");
+          alert(data.error || "Login failed");
         }
       })
       .catch((error) => {

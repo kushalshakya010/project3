@@ -81,18 +81,16 @@ exports.createPaymentMethod = async (req, res) => {
   try {
     const { type, card } = req.body;
     const testCard = {
-        
-        "exp_month": 8,
-        "exp_year": 2025,
-        "number": "4242424242424242",
-        "cvc" : "123",
-    
-      }
+      exp_month: 8,
+      exp_year: 2025,
+      number: "4242424242424242",
+      cvc: "123",
+    };
 
     // Create a new PaymentMethod with Stripe
     const paymentMethod = await stripe.paymentMethods.create({
       type, // e.g., 'card'
-      card : testCard, // { number, exp_month, exp_year, cvc } for card payment method
+      card: testCard, // { number, exp_month, exp_year, cvc } for card payment method
     });
 
     res.status(201).json({

@@ -1,64 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Driver Dashboard - Traffic Offense Management</title>
-    <link rel="stylesheet" href="/FrontEnd/assets/css/styles.css">
-    <link rel="stylesheet" href="/FrontEnd/assets/css/driver-dashboard.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/FrontEnd/assets/css/styles.css" />
+    <link rel="stylesheet" href="/FrontEnd/assets/css/driver-dashboard.css" />
+  </head>
+  <body>
     <div class="driver-dashboard-container">
-        <header>
-            <h1>Driver Dashboard</h1>
-            <nav>
-                <ul>
-                    <li><a href="/logout">Logout</a></li>
-                </ul>
-            </nav>
-        </header>
+      <header>
+        <h1>Driver Dashboard</h1>
+        <nav>
+          <ul>
+            <li><a href="/FrontEnd/views/index.html">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
 
-        <section id="offense-list">
-            <h2>Your Offenses</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Offense Description</th>
-                        <th>Fine Amount</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="offenses">
-                    <!-- Current offenses will be dynamically added here -->
-                </tbody>
-            </table>
-            <!-- Pagination container for current offenses -->
-            <div id="offense-pagination" class="pagination"></div>
-        </section>
+      <section id="offense-list">
+        <h2>Your Offenses</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Offense Description</th>
+              <th>Fine Amount</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="offenses">
+            <!-- Current offenses will be dynamically added here -->
+          </tbody>
+        </table>
+        <!-- Pagination container for current offenses -->
+        <div id="offense-pagination" class="pagination"></div>
+      </section>
 
-        <section id="past-offense-list">
-            <h2>Past Offenses</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Offense Description</th>
-                        <th>Fine Amount</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="past-offenses">
-                    <!-- Past offenses will be dynamically added here -->
-                </tbody>
-            </table>
-            <!-- Pagination container for past offenses -->
-            <div id="past-offense-pagination" class="pagination"></div>
-        </section>
+      <section id="past-offense-list">
+        <h2>Past Offenses</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Offense Description</th>
+              <th>Fine Amount</th>
+              <th>Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="past-offenses">
+            <!-- Past offenses will be dynamically added here -->
+          </tbody>
+        </table>
+        <!-- Pagination container for past offenses -->
+        <div id="past-offense-pagination" class="pagination"></div>
+      </section>
     </div>
 
-    <script src="/FrontEnd/assets/js/main.js"></script>
-    <script src="/FrontEnd/js/driverDashboard.js"></script>
-</body>
+    <script type="module" src="/FrontEnd/js/driverDashboard.js"></script>
+  </body>
 </html>
