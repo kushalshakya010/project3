@@ -1,62 +1,126 @@
-import { getAllOffenses } from "./api.js";
+import { getAllOffenses, editOffense } from "./api.js";
+
 let offenses = [];
-let currentEditIndex = null;
+const ITEMS_PER_PAGE = 10; // Number of offenses displayed per page
+let currentOffensePage = 1;
+let currentPastOffensePage = 1;
 
-// Function to load offenses into the respective tables
-function loadOffenses(offenses) {
-  const pendingOffensesTable = document.getElementById("offenses");
-  const pastOffensesTable = document.getElementById("past-offenses");
+const loader = document.querySelector(".mainContainer");
 
-  // Clear existing rows
-  pendingOffensesTable.innerHTML = "";
-  pastOffensesTable.innerHTML = "";
+// Load offenses with pagination
+function loadOffenses() {
+  const pendingOffenses = offenses.filter(
+    (offense) => offense.paidStatus === "Unpaid"
+  );
 
-  // Loop through offenses and categorize based on payment status
-  offenses.forEach((offense, index) => {
+  const pastOffenses = offenses.filter(
+    (offense) => offense.paidStatus === "Paid"
+  );
+
+  paginateTable(
+    "offenses",
+    pendingOffenses,
+    currentOffensePage,
+    "offense-pagination",
+    updateOffensePage
+  );
+  paginateTable(
+    "past-offenses",
+    pastOffenses,
+    currentPastOffensePage,
+    "past-offense-pagination",
+    updatePastOffensePage
+  );
+}
+
+// Helper to paginate tables
+function paginateTable(
+  tableId,
+  offenseList,
+  page,
+  paginationContainerId,
+  setPageCallback
+) {
+  const tableBody = document.getElementById(tableId);
+  const paginationContainer = document.getElementById(paginationContainerId);
+
+  tableBody.innerHTML = "";
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const paginatedOffenses = offenseList.slice(startIndex, endIndex);
+
+  paginatedOffenses.forEach((offense, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-            <td>${offense.offenseDetails}</td>
-            <td>$${offense.fine}</td>
-            <td>${offense.location}</td>
-            <td>${offense.paidStatus}</td>
-        `;
-
+      <td>${offense.offenseDetails}</td>
+      <td>$${offense.fine}</td>
+      <td>${offense.location}</td>
+      <td>${offense.paidStatus}</td>
+    `;
     if (offense.paidStatus === "Unpaid") {
-      // Add a "Pay Now" button to pending offenses
       const actionCell = document.createElement("td");
       const payButton = document.createElement("button");
       payButton.textContent = "Pay Now";
-      payButton.onclick = () => payFine(index);
+      payButton.onclick = () => payFine(index + startIndex, offense);
       actionCell.appendChild(payButton);
       row.appendChild(actionCell);
-
-      pendingOffensesTable.appendChild(row);
-    } else {
-      // Only display past offenses in "Past Offenses" table
-      pastOffensesTable.appendChild(row);
     }
+    tableBody.appendChild(row);
   });
+
+  renderPagination(
+    offenseList.length,
+    page,
+    paginationContainer,
+    setPageCallback
+  );
 }
 
-// Function to handle fine payment
-function payFine(index) {
-  const offense = offenses[index];
-  offense.paidStatus = "Paid";
+// Generate pagination controls
+function renderPagination(totalItems, currentPage, container, setPageCallback) {
+  container.innerHTML = "";
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
-  alert(`Payment successful for: ${offense.offenseDetails}`);
-  loadOffenses(); // Refresh tables after updating the status
+  for (let i = 1; i <= totalPages; i++) {
+    const pageButton = document.createElement("button");
+    pageButton.className = "page-btn";
+    pageButton.textContent = i;
+    pageButton.onclick = () => setPageCallback(i);
+    if (i === currentPage) {
+      pageButton.classList.add("active");
+    }
+    container.appendChild(pageButton);
+  }
+}
+
+// Page update callbacks
+function updateOffensePage(page) {
+  currentOffensePage = page;
+  loadOffenses();
+}
+
+function updatePastOffensePage(page) {
+  currentPastOffensePage = page;
+  loadOffenses();
+}
+
+// Payment handling
+async function payFine(index, pendingOffense) {
+  loader.style.visibility = "visible";
+  pendingOffense.paidStatus = "Paid";
+  const updateOffense = await editOffense(pendingOffense);
+
+  alert(`Payment successful for: ${offenses[index].offenseDetails}`);
+  loadOffenses(); // Refresh tables after payment update
+  loader.style.visibility = "hidden";
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   const user = JSON.parse(localStorage.getItem("user")) || [];
-
-  console.log(user.licenseNumber);
-
   offenses = await getAllOffenses();
-  offenses.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  console.log(offenses);
-  offenses = offenses.filter((offense) => {
-    return offense.licenseNumber == user.licenseNumber;
-  });
-  loadOffenses(offenses);
+
+  offenses = offenses.filter(
+    (offense) => offense.licenseNumber == user.licenseNumber
+  );
+  loadOffenses();
 });
