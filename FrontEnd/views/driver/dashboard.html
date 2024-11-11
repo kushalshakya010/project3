@@ -6,6 +6,8 @@
     <title>Driver Dashboard - Traffic Offense Management</title>
     <link rel="stylesheet" href="/FrontEnd/assets/css/styles.css" />
     <link rel="stylesheet" href="/FrontEnd/assets/css/driver-dashboard.css" />
+    <script src="/FrontEnd/js/Risk-Meter/raphael-2.1.4.min.js"></script>
+    <script src="/FrontEnd/js/Risk-Meter/justgage.js"></script>
   </head>
   <body>
     <div class="mainContainer">
@@ -20,6 +22,27 @@
           </ul>
         </nav>
       </header>
+      <div class="greeting">
+        <div class="welcome">
+          <h1>Good Afternoon !!</h1>
+          <h2>License Number: 2001</h2>
+        </div>
+        <div class="risk-meter">
+          <div id="gauge" class="gauge"></div>
+          <script>
+            var g = new JustGage({
+              id: "gauge",
+              value: 4, // Example value for the risk meter
+              min: 0,
+              max: 10,
+              title: "Risk Level", // Customize the title
+              // label: "Risk", // Optional label
+              // levelColors: ["#f00", "#ff0", "#0f0"], // Color scale for the gauge
+              // gaugeWidthScale: 0.6, // Adjust the gauge thickness
+            });
+          </script>
+        </div>
+      </div>
 
       <section id="offense-list">
         <h2>Your Offenses</h2>

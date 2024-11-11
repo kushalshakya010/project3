@@ -144,4 +144,93 @@ td button[disabled] {
     background-color: #333;
     opacity: 80%;
 }
+
+/* ---------------------------------Risk Meter-------------------------------- */
+
+/* .greeting{
+    display: flex;
+    background-color: #2e6b31; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 10px #888888;     
+}
+.welcome{
+    background-color: #3498db; 
+    
+}
+.Risk-meter{
+     color: yellow; 
+     background-color: red; 
+} */
+
+/* ------------------------------------------test----------------------------------------------- */
+/* Flex container for greeting section */
+.greeting {
+    display: flex;
+    justify-content: space-between; /* Ensures space between the elements */
+    align-items: center; /* Vertically center-align items */
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 900px;
+  }
+  
+  /* Styling for the welcome section */
+  .welcome {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 2; /* Makes the welcome section occupy more space */
+    margin-right: 20px; /* Adds space between welcome and risk meter */
+    max-width: 60%; /* Limits width to 60% */
+  }
+  
+  .welcome h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .welcome h2 {
+    font-size: 1.5em;
+    color: #007bff;
+    font-family: 'Verdana', sans-serif;
+    font-weight: normal;
+    margin-top: 0;
+  }
+  
+  /* Styling for the Risk Meter section */
+  .risk-meter {
+    flex: 1; /* Takes up remaining space */
+    text-align: center;
+    max-width: 35%; /* Limits width of risk meter section */
+  }
+  
+  #gage {
+    width: 100%; /* Makes sure the gauge fits within its container */
+    height: auto;
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 768px) {
+    .greeting {
+      flex-direction: column; /* Stacks elements vertically */
+      align-items: flex-start; /* Align items to the start */
+    }
+  
+    .welcome {
+      margin-bottom: 20px; /* Adds space between sections */
+      text-align: left;
+      width: 100%; /* Full width on mobile */
+    }
+  
+    .risk-meter {
+      width: 100%; /* Full width on mobile */
+    }
+  }
   
