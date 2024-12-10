@@ -38,7 +38,7 @@ exports.createOffense = async (req, res) => {
     await sendEmailNotification(
       offense.email,
       "New Offense Created",
-      `A new offense has been recorded: ${offense.offenseDetails} with a fine of ${offense.fine}.`
+      `A new offense has been recorded: ${offense.offenseDetails} with a fine of ${offense.fine}. Please pay the fine in time.`
     );
 
     res.status(201).json({

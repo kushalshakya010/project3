@@ -32,6 +32,9 @@ document
         }
         localStorage.clear();
         localStorage.setItem("user", JSON.stringify(data.user));
+
+        localStorage.setItem("licenseNumber", JSON.stringify(data.user.licenseNumber));
+
         if (data.user.role === "police") {
           // Redirect to the appropriate dashboard
 

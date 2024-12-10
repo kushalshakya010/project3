@@ -157,6 +157,14 @@ document.querySelector(".save-btn").addEventListener("click", () => saveEdit());
 // Initialize tables with data on page load
 document.addEventListener("DOMContentLoaded", async () => {
   const offenses = await getAllOffenses();
+
+  var licenseNumber = localStorage.getItem("licenseNumber");
+  if (licenseNumber) {
+    document.getElementById("license-number").textContent = licenseNumber;
+  } else {
+    document.getElementById("license-number").textContent = "Unknown";
+  }
+
   offenses.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   pendingOffenses = offenses.filter((x) => x.paidStatus === "Unpaid");
@@ -165,3 +173,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadPendingOffenses(pendingOffenses);
   loadOffenseHistory(offenseHistory);
 });
+
+// ----------------greetings---------------
+
+// Function to update greeting based on time of day
+function updateGreeting() {
+  const greetingText = document.getElementById("greeting-text");
+  const currentHour = new Date().getHours(); // Get current hour (0-23)
+
+  if (currentHour < 12) {
+    greetingText.textContent = "Good Morning !";
+  } else if (currentHour < 18) {
+    greetingText.textContent = "Good Afternoon !";
+  } else {
+    greetingText.textContent = "Good Evening !";
+  }
+}
+// Call the function to set the initial greeting
+updateGreeting();

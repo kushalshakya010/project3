@@ -32,29 +32,40 @@ const sendEmailNotification = async (email, offenseDetails) => {
 exports.processPayment = async (req, res) => {
   const { offenseId, paymentMethodId } = req.body;
 
+  console.log(offenseId, paymentMethodId);
   // Validate the request data
   if (!offenseId || !paymentMethodId) {
     return res
       .status(400)
-      .json({ message: "Offense ID and Payment Method ID are required" });
+      .json({ error: "Offense ID and Payment Method ID are required" });
   }
 
   try {
     // Retrieve the offense
     const offense = await Offense.findById(offenseId);
     if (!offense) return res.status(404).json({ message: "Offense not found" });
-
+    console.log(
+      "-------------------Creating payment Intent--------------------------"
+    );
     // Create a Stripe payment
     const paymentIntent = await stripe.paymentIntents.create({
       amount: offense.fine, // Fine amount in cents
       payment_method: paymentMethodId,
       confirm: true,
+      currency: "usd",
+      automatic_payment_methods: {
+        enabled: "true",
+        allow_redirects: "never",
+      },
     });
 
     // Mark offense as paid
     offense.paidStatus = "Paid";
     await offense.save();
 
+    console.log(
+      "-------------------Recording payment Intent--------------------------"
+    );
     // Record payment in the Payment collection
     const payment = new Payment({
       offenseId: offense._id,
@@ -73,7 +84,7 @@ exports.processPayment = async (req, res) => {
     console.error("Payment Processing Error:", error);
     res
       .status(500)
-      .json({ message: error.message || "Failed to process payment" });
+      .json({ error: error.message || "Failed to process payment" });
   }
 };
 

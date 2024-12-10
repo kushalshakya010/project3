@@ -3,7 +3,7 @@
 const User = require("../models/User"); // Import the User model
 // const jwt = require("jsonwebtoken"); // For generating JWT tokens
 
-// Function to handle login
+// Function to handle login ---------------------------------------------------------------------------------
 exports.login = async (req, res) => {
   const { licenseNumber, password } = req.body;
 
@@ -16,12 +16,7 @@ exports.login = async (req, res) => {
     if (user.password != password) {
       return res.status(404).json({ error: "Password incorrect" });
     }
-    // // Generate a JWT token
-    // const token = jwt.sign(
-    //   { id: user._id, role: user.role },
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: "1h" }
-    // );
+   ;
 
     // Send the token to the client
     res.status(200).json({ message: "User found", user });
@@ -45,13 +40,6 @@ exports.register = async (req, res) => {
 
     const newUser = new User(req.body);
     await newUser.save();
-
-    // Generate a JWT token
-    // const token = jwt.sign(
-    //   { id: user._id, role: user.role },
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: "1h" }
-    // );
 
     // Send the token to the client
     res.status(200).json({ message: "User created", user: newUser });

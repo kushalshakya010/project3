@@ -24,23 +24,11 @@
       </header>
       <div class="greeting">
         <div class="welcome">
-          <h1>Good Afternoon !!</h1>
-          <h2>License Number: 2001</h2>
+          <h1 id="greeting-text">Good Morning !</h1>
+          <h2>License Number: <span id="license-number"></span></h2>
         </div>
         <div class="risk-meter">
           <div id="gauge" class="gauge"></div>
-          <script>
-            var g = new JustGage({
-              id: "gauge",
-              value: 4, // Example value for the risk meter
-              min: 0,
-              max: 10,
-              title: "Risk Level", // Customize the title
-              // label: "Risk", // Optional label
-              // levelColors: ["#f00", "#ff0", "#0f0"], // Color scale for the gauge
-              // gaugeWidthScale: 0.6, // Adjust the gauge thickness
-            });
-          </script>
         </div>
       </div>
 
