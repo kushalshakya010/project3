@@ -103,3 +103,28 @@ nav ul li a:hover {
         padding: 6px 12px;
     }
 }
+.prediction-btn{
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.prediction-btn:hover{
+    background-color: #fff;
+    color: #3E8E41;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+
+}
+/* ---------------------------------------------------------------------------------- */
+.form-group{
+    font-size: 20px;
+    font-weight: bold;
+}

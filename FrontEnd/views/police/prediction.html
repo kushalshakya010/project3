@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prediction - Traffic Offense Management</title>
     <link rel="stylesheet" href="/FrontEnd/assets/css/prediction.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        margin: 50px auto;
+        text-align: center;
+      }
+      canvas {
+        margin-top: 20px;
+      }
+      #map {
+        height: 800px;
+        margin: 20px auto;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <div class="prediction-container">
@@ -22,7 +46,31 @@
           </ul>
         </nav>
       </header>
+
+      <div class="form-group">
+        <label for="year">Year to Predict:</label>
+        <input
+          type="text"
+          id="year"
+          name="year"
+          maxlength="4"
+          pattern="\d{4}"
+          required
+          title="Please enter a 4-digit year"
+        />
+      </div>
+
+      <div class="container">
+        <canvas id="predictionChart" hidden width="400" height="200"></canvas>
+        <button class="prediction-btn" type="submit" id="predictAccident">Predict Accident</button>
+      </div>
+
+      <div id="map"></div>
     </div>
-    <script src="/FrontEnd/js/policeDashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="leaflet-heat.js"></script>
+    <script type="module" src="/FrontEnd/js/prediction.js"></script>
   </body>
 </html>

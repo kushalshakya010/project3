@@ -5,6 +5,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const offenseRoutes = require("./routes/offenseRoutes");
 const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
+const { runTest } = require("./test");
 
 dotenv.config(); // Load environment variables from .env
 
@@ -28,3 +29,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// runTest();
