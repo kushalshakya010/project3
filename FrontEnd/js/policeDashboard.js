@@ -75,7 +75,19 @@ function updatePendingPagination() {
 
   const totalPages = Math.ceil(pendingOffenses.length / recordsPerPage);
 
-  for (let i = 1; i <= totalPages; i++) {
+  const pageButton = document.createElement("button");
+  pageButton.classList.add("page-btn");
+  pageButton.innerText = "<";
+  pageButton.addEventListener("click", () => {
+    currentPendingPage = currentPendingPage != 1 ? currentPendingPage - 1 : 1;
+    loadPendingOffenses(pendingOffenses);
+  });
+  paginationContainer.appendChild(pageButton);
+  let index = 1;
+  if (currentPendingPage > 5) {
+    index = currentPendingPage - 4;
+  }
+  for (let i = index; i <= index + 4; i++) {
     const pageButton = document.createElement("button");
     pageButton.classList.add("page-btn");
     if (i === currentPendingPage) pageButton.classList.add("active");
@@ -86,6 +98,16 @@ function updatePendingPagination() {
     });
     paginationContainer.appendChild(pageButton);
   }
+
+  const pageButton2 = document.createElement("button");
+  pageButton2.classList.add("page-btn");
+  pageButton2.innerText = ">";
+  pageButton2.addEventListener("click", () => {
+    currentPendingPage =
+      currentPendingPage != totalPages ? currentPendingPage + 1 : totalPages;
+    loadPendingOffenses(pendingOffenses);
+  });
+  paginationContainer.appendChild(pageButton2);
 }
 
 // Function to create pagination controls for offense history
@@ -95,7 +117,19 @@ function updateHistoryPagination() {
 
   const totalPages = Math.ceil(offenseHistory.length / recordsPerPage);
 
-  for (let i = 1; i <= totalPages; i++) {
+  const pageButton = document.createElement("button");
+  pageButton.classList.add("page-btn");
+  pageButton.innerText = "<";
+  pageButton.addEventListener("click", () => {
+    currentHistoryPage = currentHistoryPage != 1 ? currentHistoryPage - 1 : 1;
+    loadOffenseHistory(offenseHistory);
+  });
+  paginationContainer.appendChild(pageButton);
+  let index = 1;
+  if (currentHistoryPage > 5) {
+    index = currentHistoryPage - 4;
+  }
+  for (let i = index; i <= index + 4; i++) {
     const pageButton = document.createElement("button");
     pageButton.classList.add("page-btn");
     if (i === currentHistoryPage) pageButton.classList.add("active");
@@ -106,6 +140,15 @@ function updateHistoryPagination() {
     });
     paginationContainer.appendChild(pageButton);
   }
+  const pageButton2 = document.createElement("button");
+  pageButton2.classList.add("page-btn");
+  pageButton2.innerText = ">";
+  pageButton2.addEventListener("click", () => {
+    currentHistoryPage =
+      currentHistoryPage != totalPages ? currentHistoryPage + 1 : totalPages;
+      loadOffenseHistory(offenseHistory);
+  });
+  paginationContainer.appendChild(pageButton2);
 }
 
 // Function to open the edit modal and populate with offense data

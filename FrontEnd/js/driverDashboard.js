@@ -68,7 +68,7 @@ function paginateTable(
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${offense.offenseDetails}</td>
-      <td>$${offense.fine}</td>
+      <td>${offense.fine}</td>
       <td>${offense.location}</td>
       <td>${offense.paidStatus}</td>
     `;

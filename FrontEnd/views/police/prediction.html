@@ -9,6 +9,10 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
+
+    <script src="https://cdn.jsdelivr.net/npm/regression@2.0.1/dist/regression.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -24,7 +28,7 @@
         margin-top: 20px;
       }
       #map {
-        height: 800px;
+        height: 700px;
         margin: 20px auto;
         width: 100%;
       }
@@ -61,16 +65,21 @@
       </div>
 
       <div class="container">
-        <canvas id="predictionChart" hidden width="400" height="200"></canvas>
-        <button class="prediction-btn" type="submit" id="predictAccident">Predict Accident</button>
+        <h1 style="color: black">Accident Prediction using Regression</h1>
+        <canvas id="regressionChart" width="800" height="400"></canvas>
+        <button class="prediction-btn" type="submit" id="predictAccident">
+          Predict Accident
+        </button>
       </div>
+      <h1 style="color: black">Accident Overview using a Heatmap</h1>
 
       <div id="map"></div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="leaflet-heat.js"></script>
     <script type="module" src="/FrontEnd/js/prediction.js"></script>
+    <script type="module" src="/FrontEnd/js/heatMap.js"></script>
   </body>
 </html>

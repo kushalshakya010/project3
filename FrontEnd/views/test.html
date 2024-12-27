@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accident Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/regression@2.0.1/dist/regression.min.js"></script>
+</head>
+<body>
+    <h1>Accident Prediction using Regression</h1>
+    <p id="output"></p>
+    <canvas id="regressionChart" width="800" height="400"></canvas>
+
+    <script>
+        // Updated dataset: years and accident counts
+        const years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+        const accidentCounts = [69, 72, 65, 75, 70, 68, 73, 78, 81, 77, 85, 88, 90, 65, 60];
+
+        // Normalize the years by subtracting the starting year
+        const baseYear = 2010;
+        const normalizedYears = years.map(year => year - baseYear);
+
+        // Format the data for regression.js using normalized years
+        const data = normalizedYears.map((year, index) => [year, accidentCounts[index]]);
+
+        // Perform polynomial regression (order 2 for quadratic fitting)
+        const result = regression.polynomial(data, { order: 2 });
+
+        // Predict accidents for normalized future years (e.g., 2025, 2026)
+        const prediction2025 = result.predict(2025 - baseYear);
+        const prediction2026 = result.predict(2026 - baseYear);
+
+        // Display predictions on the webpage
+        document.getElementById('output').innerHTML = `
+            <strong>Predicted Accidents:</strong><br>
+            Year 2025: ${prediction2025[1].toFixed(2)}<br>
+            Year 2026: ${prediction2026[1].toFixed(2)}<br>
+            Equation: ${result.string}
+        `;
+
+        // Generate data points for the regression curve
+        const regressionCurve = [];
+        for (let year = 0; year <= 16; year += 0.1) { // Use normalized years
+            const predicted = result.predict(year);
+            regressionCurve.push({ x: year + baseYear, y: predicted[1] }); // Convert back to actual years
+        }
+
+        // Chart.js setup
+        const ctx = document.getElementById('regressionChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Historical Data',
+                        data: years.map((year, index) => ({ x: year, y: accidentCounts[index] })),
+                        backgroundColor: 'blue',
+                        pointRadius: 5,
+                        showLine: false, // Only show scatter points for historical data
+                    },
+                    {
+                        label: 'Polynomial Regression Curve',
+                        data: regressionCurve,
+                        borderColor: 'red',
+                        borderWidth: 2,
+                        fill: false,
+                        showLine: true, // Show a smooth line for the regression curve
+                        pointRadius: 0, // Hide points on the curve for smoothness
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Year' },
+                        type: 'linear',
+                        position: 'bottom',
+                    },
+                    y: {
+                        title: { display: true, text: 'Number of Accidents' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
